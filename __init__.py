@@ -1,3 +1,4 @@
+from .types.libimport import browse_type_library
 from binaryninja import PluginCommand
 
 from .types.export import export_type_library
@@ -13,4 +14,10 @@ PluginCommand.register_for_range(
     "Reverse Engineer's Toolkit\\types\\Make Structure Here",
     "Make a structure from this range of data variables",
     make_struct_here,
+)
+
+PluginCommand.register(
+    "Reverse Engineer's Toolkit\\types\\Import from Type Library",
+    "Import types and objects from a Type Library",
+    browse_type_library,
 )
