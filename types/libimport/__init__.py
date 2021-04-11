@@ -4,7 +4,12 @@ from binaryninja.typelibrary import TypeLibrary
 from .typelib_browser import TypeLibraryBrowser
 
 
-def browse_type_library(view):
+def browse_type_library(ctx):
+    view = ctx.binaryView
+
+    if view is None:
+        return
+
     lib_path: bytes = get_open_filename_input("typelibrary filename:", "*.bntl")
 
     if lib_path is None:

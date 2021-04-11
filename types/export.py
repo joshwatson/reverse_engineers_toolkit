@@ -1,5 +1,6 @@
 from binaryninja import BinaryView, Type, TypeLibrary, log, Symbol, SymbolType
 from binaryninja import core
+from binaryninjaui import UIActionContext
 
 import os
 
@@ -45,7 +46,10 @@ def generate_type_library_path(view: BinaryView) -> str:
     return os.path.join(path, "typelib", view.arch.name, filename)
 
 
-def export_type_library(view: BinaryView):
+def export_type_library(ctx: UIActionContext):
+    if (view := ctx.binaryView) is None:
+        return
+
     lib = TypeLibrary.new(view.arch, view.file.original_filename)
 
     lib.add_platform(view.platform)
