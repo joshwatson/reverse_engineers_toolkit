@@ -26,9 +26,11 @@ class CallGraph(FlowGraph):
 
             node.lines = [
                 DisassemblyTextLine(
-                    [InstructionTextToken(token_type, function.name, function.start)]
+                    [InstructionTextToken(token_type, function.name, function.start)],
+                    function.start
                 )
             ]
+
             self.append(node)
 
         for function in view.functions:
@@ -56,6 +58,14 @@ class CallGraphWidget(FlowGraphWidget, BinaryDataNotification):
 
         BinaryDataNotification.__init__(self)
         view.register_notification(self)
+
+    def navigate(self, address):
+        self.showAddress(address, True)
+        return True
+
+    def navigateToFunction(self, function, address):
+        self.showAddress(address, True)
+        return True
 
     def function_added(self, view, func):
         self.graph = self.graph.update()
