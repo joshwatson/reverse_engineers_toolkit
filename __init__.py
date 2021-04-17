@@ -1,9 +1,10 @@
 from .types.libimport import browse_type_library
 from binaryninja import PluginCommand
-from binaryninjaui import UIAction, UIActionHandler, Menu
+from binaryninjaui import UIAction, UIActionHandler, Menu, ViewType
 
 from .types.export import export_type_library
 from .types.make_struct import make_struct_here
+from .functions.callgraph import CallGraphViewType
 
 UIAction.registerAction("Reverse Engineer's Toolkit\\Types\\Export Type Library")
 UIActionHandler.globalActions().bindAction(
@@ -28,3 +29,5 @@ PluginCommand.register_for_range(
     "Make a structure from this range of data variables",
     make_struct_here,
 )
+
+ViewType.registerViewType(CallGraphViewType())
