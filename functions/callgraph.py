@@ -5,6 +5,7 @@ from binaryninja.flowgraph import FlowGraphNode
 from binaryninja.function import DisassemblyTextLine, Function, InstructionTextToken
 from binaryninjaui import FlowGraphWidget, ViewType
 
+
 class CallGraph(FlowGraph):
     def __init__(self, function: Function):
         FlowGraph.__init__(self)
@@ -25,15 +26,9 @@ class CallGraph(FlowGraph):
 
             node.lines = [
                 DisassemblyTextLine(
-                [
-                    InstructionTextToken(
-                        token_type,
-                        function.name,
-                        function.start
-                    )
-                ]
-            )
-        ]
+                    [InstructionTextToken(token_type, function.name, function.start)]
+                )
+            ]
             self.append(node)
 
         for function in view.functions:
