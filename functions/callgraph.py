@@ -33,7 +33,7 @@ class CallGraph(FlowGraph):
 
         for function in view.functions:
             node = nodes[function]
-            for callee in function.callees:
+            for callee in set(function.callees):
                 callee_node = nodes[callee]
                 node.add_outgoing_edge(BranchType.IndirectBranch, callee_node)
 
