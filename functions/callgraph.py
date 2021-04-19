@@ -27,7 +27,7 @@ class CallGraph(FlowGraph):
             node.lines = [
                 DisassemblyTextLine(
                     [InstructionTextToken(token_type, function.name, function.start)],
-                    function.start
+                    function.start,
                 )
             ]
 
