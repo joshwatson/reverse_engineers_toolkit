@@ -24,7 +24,10 @@ def add_members(view: BinaryView, structure: Structure, start: int, length: int)
 
         # if this field is a pointer, let's see what it's pointing at. We can make
         # more informed decisions about the type and name of this field that way.
-        if type_.type_class == TypeClass.PointerTypeClass:
+        if (
+            type_.type_class == TypeClass.PointerTypeClass
+            and type_.target.type_class == TypeClass.VoidTypeClass
+        ):
             br.seek(dv.address)
             ptr = (
                 br.read64()
