@@ -6,10 +6,10 @@ from binaryninja.demangle import (
 )
 from binaryninja.enums import SymbolType, TypeClass
 from binaryninja.function import Function
-from binaryninja.types import QualifiedName, Type, Structure
+from binaryninja.types import QualifiedName, Type, StructureBuilder
 
 
-def add_members(view: BinaryView, structure: Structure, start: int, length: int):
+def add_members(view: BinaryView, structure: StructureBuilder, start: int, length: int):
     offset = 0
     br = BinaryReader(view)
 
@@ -69,7 +69,7 @@ def add_members(view: BinaryView, structure: Structure, start: int, length: int)
 def make_struct_here(view: BinaryView, address: int, length: int):
     structure_name = f"struct_{address:x}"
 
-    structure = Structure()
+    structure = StructureBuilder()
     structure.width = length
 
     add_members(view, structure, address, length)
